@@ -4,34 +4,31 @@ import Deal from "./components/Deal";
 
 class App extends Component {
   state = {
-    deals: [
-      {
-        id: 1,
-        title: "Deal 1",
-        url: "#"
-      },
-      {
-        id: 2,
-        title: "Deal 2",
-        url: "#"
-      },
-      {
-        id: 3,
-        title: "Deal 3",
-        url: "#"
-      }
-    ]
+    data: {},
+    deals: []
   };
 
   handleClick = dealId => {
     var deals = [...this.state.deals];
     var deal = deals.find(deal => deal.id === dealId);
-    alert(deal.title);
-
-    this.setState({
-      deals
-    });
+    alert("Navigating to: " + deal.title);
+    this.setState({ deals });
   };
+
+  componentDidMount() {
+    fetch("https://www.reddit.com/r/frugalmalefashion/new.json")
+      .then(response => response.json())
+      .then(jsonResponse =>
+        this.setState({
+          data: jsonResponse,
+          deals: jsonResponse.data.children.map(post => ({
+            id: post.data.id,
+            title: post.data.title,
+            url: "https://www.reddit.com/" + post.data.permalink
+          }))
+        })
+      );
+  }
 
   render() {
     return (

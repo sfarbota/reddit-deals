@@ -7,6 +7,7 @@ class Deal extends Component {
       <div className="deal" id={"deal-" + id}>
         <a
           href={url}
+          target="_blank"
           onClick={() => {
             onClick(id);
           }}
