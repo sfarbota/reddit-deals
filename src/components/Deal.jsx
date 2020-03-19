@@ -5,13 +5,7 @@ class Deal extends Component {
     const { id, title, url, onClick } = this.props;
     return (
       <div className="deal" id={"deal-" + id}>
-        <a
-          href={url}
-          target="_blank"
-          onClick={() => {
-            onClick(id);
-          }}
-        >
+        <a href={url} onClick={() => onClick(id)}>
           {title}
         </a>
       </div>

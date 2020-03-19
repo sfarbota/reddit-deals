@@ -1,53 +1,59 @@
-import React, { Component } from "react";
+import React, { useState, useEffect } from "react";
 import "./App.css";
 import Deal from "./components/Deal";
 
-class App extends Component {
-  state = {
-    data: {},
-    deals: []
-  };
+function App() {
+  const [deals, setDeals] = useState([]);
 
-  handleClick = dealId => {
-    var deals = [...this.state.deals];
-    var deal = deals.find(deal => deal.id === dealId);
+  const handleClick = dealId => {
+    let deal = deals.find(deal => deal.id === dealId);
     alert("Navigating to: " + deal.title);
-    this.setState({ deals });
   };
 
-  componentDidMount() {
+  useEffect(() => {
     fetch("https://www.reddit.com/r/frugalmalefashion/new.json")
-      .then(response => response.json())
-      .then(jsonResponse =>
-        this.setState({
-          data: jsonResponse,
-          deals: jsonResponse.data.children.map(post => ({
-            id: post.data.id,
-            title: post.data.title,
-            url: "https://www.reddit.com/" + post.data.permalink
-          }))
-        })
-      );
-  }
+      .then(res => res.json())
+      .then(res => res.data.children)
+      .then(res => {
+        const posts = [];
+        res.map(item => posts.push(item.data));
+        setDeals(posts);
+      });
+  }, []);
 
-  render() {
-    return (
-      <div className="App">
-        <h1>Reddit Deals</h1>
-        {this.state.deals.map((deal, index) => {
-          return (
-            <Deal
-              key={deal.id}
-              id={deal.id}
-              title={deal.title}
-              url={deal.url}
-              onClick={this.handleClick}
-            />
-          );
-        })}
-      </div>
-    );
-  }
+  console.log(deals);
+
+  // componentDidMount() {
+  //   fetch("https://www.reddit.com/r/frugalmalefashion/new.json")
+  //     .then(response => response.json())
+  //     .then(jsonResponse =>
+  //       this.setState({
+  //         data: jsonResponse,
+  //         deals: jsonResponse.data.children.map(post => ({
+  //           id: post.data.id,
+  //           title: post.data.title,
+  //           url: "https://www.reddit.com/" + post.data.permalink
+  //         }))
+  //       })
+  //     );
+  // }
+
+  return (
+    <div className="App">
+      <h1>Reddit Deals</h1>
+      {deals.map(deal => {
+        return (
+          <Deal
+            key={deal.id}
+            id={deal.id}
+            title={deal.title}
+            url={"https://www.reddit.com/" + deal.permalink}
+            onClick={handleClick}
+          />
+        );
+      })}
+    </div>
+  );
 }
 
 export default App;
