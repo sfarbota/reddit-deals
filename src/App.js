@@ -16,13 +16,15 @@ function App() {
       .then(res => res.data.children)
       .then(res => {
         const posts = [];
-        res.map(item => posts.push(item.data));
+        res.map(item => {
+          posts.push(item.data);
+          return posts;
+        });
         setDeals(posts);
       });
   }, []);
 
   console.log(deals);
-
   // componentDidMount() {
   //   fetch("https://www.reddit.com/r/frugalmalefashion/new.json")
   //     .then(response => response.json())
@@ -39,7 +41,7 @@ function App() {
   // }
 
   return (
-    <div className="App">
+    <div className="App container">
       <h1>Reddit Deals</h1>
       {deals.map(deal => {
         return (

@@ -1,16 +1,27 @@
-import React, { Component } from "react";
+import React from "react";
 
-class Deal extends Component {
-  render() {
-    const { id, title, url, onClick } = this.props;
-    return (
-      <div className="deal" id={"deal-" + id}>
-        <a href={url} onClick={() => onClick(id)}>
-          {title}
-        </a>
-      </div>
-    );
-  }
+function Deal(props) {
+  const { id, title, url, onClick } = props;
+
+  return (
+    <div className="mt-4 deal" id={"deal-" + id}>
+      <table class="table">
+        <tbody>
+          <tr>
+            <td>
+              <a
+                className="align-middle"
+                href={url}
+                onClick={() => onClick(id)}
+              >
+                {title}
+              </a>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  );
 }
 
 export default Deal;
