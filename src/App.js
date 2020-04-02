@@ -1,8 +1,10 @@
 import React, { useState, useEffect } from "react";
 import "./App.css";
+import ImageButton from './components/ImageButton';
 import Deal from "./components/Deal";
 
 function App() {
+  const [url, setUrl] = useState('');
   const [deals, setDeals] = useState([]);
 
   const handleClick = dealId => {
@@ -11,7 +13,8 @@ function App() {
   };
 
   useEffect(() => {
-    fetch("https://www.reddit.com/r/frugalmalefashion/new.json")
+    if(url !== '')
+    fetch(url)
       .then(res => res.json())
       .then(res => res.data.children)
       .then(res => {
@@ -19,7 +22,7 @@ function App() {
         res.map(item => posts.push(item.data));
         setDeals(posts);
       });
-  }, []);
+  }, [url]);
 
   console.log(deals);
 
@@ -41,6 +44,7 @@ function App() {
   return (
     <div className="App">
       <h1>Reddit Deals</h1>
+      <ImageButton changeUrl={(x) =>{setUrl(x)}} />          
       {deals.map(deal => {
         return (
           <Deal
