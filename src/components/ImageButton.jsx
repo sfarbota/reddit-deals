@@ -7,19 +7,19 @@ import Typography from '@material-ui/core/Typography';
 
 const images = [
   {
-    url: 'https://pixabay.com/get/5ee9d6414854b10ff3d89960c62d3f7b1237dae55059_640.jpg',
+    url: 'https://static.makeuseof.com/wp-content/uploads/2020/02/basic-parts-pc-994x400.jpg',
     title: 'r/buildapcsales',
     json: 'https://www.reddit.com/r/buildapc/hot.json',
     width: '33%',
   },
   {
-    url: 'https://pixabay.com/get/54e4d0404d55ab14f1dc8460da2932761038d6e0555077_640.jpg',
+    url: 'https://ourplanetary.com/wp-content/uploads/2018/03/jbareham_171020_2073_0040_3.0.jpg',
     title: 'r/GameSale',
     json: 'https://www.reddit.com/r/gamesale/new.json',
     width: '33%',
   },
   {
-    url: 'https://pixabay.com/get/57e0d6424b50ab14f1dc8460da2932761038d6e3535378_640.jpg',
+    url: 'https://wp-en.oberlo.com/wp-content/uploads/2018/04/shutterstock_466589549.jpg',
     title: 'r/frugalmalefashion',
     json: 'https://www.reddit.com/r/frugalmalefashion/new.json',
     width: '33%',

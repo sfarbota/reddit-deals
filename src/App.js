@@ -13,8 +13,8 @@ function App() {
   };
 
   useEffect(() => {
-    if(url !== '')
-    fetch(url)
+    if(url !== ''){
+      fetch(url)
       .then(res => res.json())
       .then(res => res.data.children)
       .then(res => {
@@ -25,6 +25,7 @@ function App() {
         });
         setDeals(posts);
       });
+    }
   }, [url]);
 
   console.log(deals);
