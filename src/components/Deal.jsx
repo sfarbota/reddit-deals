@@ -1,21 +1,16 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
 function Deal(props) {
-  const { id, title, url, onClick } = props;
+  const { id, title, subReddit } = props;
 
   return (
     <div className="mt-4 deal" id={"deal-" + id}>
-      <table class="table">
+      <table className="table">
         <tbody>
           <tr>
             <td>
-              <a
-                className="align-middle"
-                href={url}
-                onClick={() => onClick(id)}
-              >
-                {title}
-              </a>
+              <Link to={`/${subReddit}/${id}`}>{title}</Link>
             </td>
           </tr>
         </tbody>
