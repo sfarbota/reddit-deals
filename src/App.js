@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import "./App.css";
 import ImageButton from './components/ImageButton';
 import Deal from "./components/Deal";
+import DefImg from './images/baseline_add_shopping_cart_black.png';
 
 function App() {
   const [url, setUrl] = useState('');
@@ -48,13 +49,20 @@ function App() {
     <div className="App container">
       <h1>Reddit Deals</h1>
       <ImageButton changeUrl={(x) =>{setUrl(x)}} />          
-      {deals.map(deal => {
+      {deals.map((deal,index) => {
+        let img;
+        if(!deal.thumbnail || deal.thumbnail === 'self' || deal.thumbnail === 'default'){
+          img = DefImg;
+        }
+        else img = deal.thumbnail;
+        
         return (
           <Deal
-            key={deal.id}
+            index={index}
             id={deal.id}
             title={deal.title}
             url={"https://www.reddit.com/" + deal.permalink}
+            thumbnail={img} width='100px'
             onClick={handleClick}
           />
         );
