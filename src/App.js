@@ -1,8 +1,11 @@
 import React, { useState, useEffect } from "react";
 import "./App.css";
+import ImageButton from './components/ImageButton';
 import Deal from "./components/Deal";
+import DefImg from './images/baseline_add_shopping_cart_black.png';
 
 function App() {
+  const [url, setUrl] = useState('');
   const [deals, setDeals] = useState([]);
 
   const handleClick = dealId => {
@@ -11,7 +14,8 @@ function App() {
   };
 
   useEffect(() => {
-    fetch("https://www.reddit.com/r/frugalmalefashion/new.json")
+    if(url !== ''){
+      fetch(url)
       .then(res => res.json())
       .then(res => res.data.children)
       .then(res => {
@@ -22,7 +26,8 @@ function App() {
         });
         setDeals(posts);
       });
-  }, []);
+    }
+  }, [url]);
 
   console.log(deals);
   // componentDidMount() {
@@ -43,13 +48,21 @@ function App() {
   return (
     <div className="App container">
       <h1>Reddit Deals</h1>
-      {deals.map(deal => {
+      <ImageButton changeUrl={(x) =>{setUrl(x)}} />          
+      {deals.map((deal,index) => {
+        let img;
+        if(!deal.thumbnail || deal.thumbnail === 'self' || deal.thumbnail === 'default'){
+          img = DefImg;
+        }
+        else img = deal.thumbnail;
+        
         return (
           <Deal
-            key={deal.id}
+            index={index}
             id={deal.id}
             title={deal.title}
             url={"https://www.reddit.com/" + deal.permalink}
+            thumbnail={img} width='100px'
             onClick={handleClick}
           />
         );
