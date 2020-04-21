@@ -9,7 +9,7 @@ const images = [
   {
     url: 'https://static.makeuseof.com/wp-content/uploads/2020/02/basic-parts-pc-994x400.jpg',
     title: 'r/buildapcsales',
-    json: 'https://www.reddit.com/r/buildapc/hot.json',
+    json: 'https://www.reddit.com/r/buildapcsales/hot.json',
     width: '33%',
   },
   {
@@ -109,7 +109,7 @@ export default function ButtonBases(props) {
           focusRipple
           onClick={() => {
             console.log('Clicked: '+image.title);
-            props.changeUrl(image.json);
+            props.changeUrl(image.title);
         }}
           key={image.title}
           className={classes.image}
