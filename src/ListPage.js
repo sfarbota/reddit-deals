@@ -1,13 +1,13 @@
 import React, { useState, useEffect } from "react";
 import Loading from "./components/Loading";
 import { getRedditDeals } from "./utils/dataApi";
-import ImageButton from './components/ImageButton';
+import ImageButton from "./components/ImageButton";
 import Deal from "./components/Deal";
-import DefImg from './images/baseline_add_shopping_cart_black.png';
+import DefImg from "./images/baseline_add_shopping_cart_black.png";
 import "./App.css";
 
 function DealList() {
-  const [url, setUrl] = useState('');
+  const [url, setUrl] = useState("");
   const [deals, setDeals] = useState([]);
   const [loading, setLoading] = useState(false);
 
@@ -17,21 +17,21 @@ function DealList() {
   // };
 
   useEffect(() => {
-    setLoading(true);
-    if(url !== ''){
+    setLoading(true && url !== "");
+    if (url !== "") {
       getRedditDeals(url)
-      //fetch(url)
-      // .then(res => res.json())
-      .then(res => res.data.children)
-      .then(res => {
-        const posts = [];
-        res.map(item => {
-          posts.push(item.data);
-          return posts;
+        //fetch(url)
+        // .then(res => res.json())
+        .then(res => res.data.children)
+        .then(res => {
+          const posts = [];
+          res.map(item => {
+            posts.push(item.data);
+            return posts;
+          });
+          setDeals(posts);
+          setLoading(false);
         });
-        setDeals(posts);
-        setLoading(false);
-      });
     }
   }, [url]);
 
@@ -43,19 +43,27 @@ function DealList() {
   return (
     <div className="App">
       <h1>Reddit Deals</h1>
-      <ImageButton changeUrl={(x) => {setUrl(x)}} />
+      <ImageButton
+        changeUrl={x => {
+          setUrl(x);
+        }}
+      />
       {loading ? <Loading /> : null}
-      {deals.map((deal,index) => {
+      {deals.map((deal, index) => {
         let img;
-        
-        if(!deal.thumbnail || deal.thumbnail === 'self' || deal.thumbnail === 'default'){
+
+        if (
+          !deal.thumbnail ||
+          deal.thumbnail === "self" ||
+          deal.thumbnail === "default"
+        ) {
           img = DefImg;
-        }
-        else img = deal.thumbnail;
-        
+        } else img = deal.thumbnail;
+
         return (
           <Deal
             index={index}
+            key={deal.id}
             id={deal.id}
             title={deal.title}
             subReddit={deal.subreddit_name_prefixed}

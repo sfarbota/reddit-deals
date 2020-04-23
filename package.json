@@ -1,5 +1,5 @@
 {
-  "name": "reddit-deals",
+  "name": "react-reddit-deals-nick",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
@@ -11,8 +11,10 @@
     "bootstrap": "4.4.1",
     "eslint-plugin-flowtype": "^3.13.0",
     "jquery": "3.4.1",
+    "moment": "2.24.0",
     "react": "^16.13.0",
     "react-dom": "^16.13.0",
+    "react-moment": "0.9.7",
     "react-router-dom": "5.1.2",
     "react-scripts": "3.4.0",
     "typescript": "^3.8.3"
@@ -38,5 +40,7 @@
       "last 1 safari version"
     ]
   },
-  "devDependencies": {}
+  "devDependencies": {},
+  "keywords": [],
+  "description": ""
 }
