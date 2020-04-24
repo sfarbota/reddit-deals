@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { getDeal } from "./utils/dataApi";
+import Moment from "react-moment";
 import Loading from "./components/Loading";
 
 function DealPage(props) {
@@ -15,10 +16,40 @@ function DealPage(props) {
     });
   }, [subreddit, id]);
 
+  if (loading)
+    return (
+      <div className="mt-5 d-flex justify-content-center">
+        <Loading />
+      </div>
+    );
+
   return (
-    <div>
-      <div className="text-center mt-3">{loading ? <Loading /> : null}</div>
-      <h1>{deal.selftext}</h1>
+    <div style={{ maxWidth: 800 }} className="container-sm mt-4 mx-auto">
+      <div className="card">
+        <div className="card-header font-weight-bold">{deal.title}</div>
+        {deal.thumbnail ? (
+          <img
+            src={deal.thumbnail}
+            style={{ width: "30%" }}
+            className="card-img-top m-2 mx-auto"
+            alt="deal"
+          />
+        ) : null}
+        <ul className="list-group list-group-flush">
+          {deal.selftext ? (
+            <li className="list-group-item">{deal.selftext}</li>
+          ) : null}
+          <li className="list-group-item">
+            <a href={deal.url} className="card-link">
+              {deal.url}
+            </a>
+          </li>
+          <li className="list-group-item">
+            <span> Date Created: </span>
+            <Moment format="MM/DD/YYYY">{deal.created_utc}</Moment>
+          </li>
+        </ul>
+      </div>
     </div>
   );
 }
