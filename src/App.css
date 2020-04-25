@@ -36,3 +36,58 @@
     transform: rotate(360deg);
   }
 }
+
+/* Home Page/Grid Nav */
+.image-button-link {
+  color: #fff;
+  text-shadow: 0 0 5px #000, 0 0 5px #000, 0 0 5px #000;
+  text-decoration: none;
+}
+
+.image-button-link:hover,
+.image-button-link:focus {
+  color: #fff;
+  text-decoration: none;
+}
+
+.image-button-link:hover .image-button-text,
+.image-button-link:focus .image-button-text {
+  padding: 12px;
+  border: 4px solid #fff;
+}
+
+.image-button {
+  width: 100%;
+  height: 160px;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.image-button-text {
+  margin: 100%;
+  position: relative;
+  z-index: 10;
+}
+
+.image-button:after {
+  content: "\A";
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  background: rgba(0, 0, 0, 0.2);
+  opacity: 1;
+  transition: all 0.5s;
+  -webkit-transition: all 0.5s;
+  -moz-transition: all 0.5s;
+}
+
+.image-button-link:hover .image-button:after,
+.image-button-link:focus .image-button:after {
+  opacity: 0;
+}
