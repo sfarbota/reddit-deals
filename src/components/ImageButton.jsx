@@ -28,6 +28,7 @@ const images = [
       "https://c1.peakpx.com/wallpaper/182/439/685/playing-sony-console-controller-wallpaper-preview.jpg",
     title: "r/PS4Deals",
     json: "https://www.reddit.com/r/PS4Deals/new.json",
+
     width: "33%"
   },
   {
@@ -82,7 +83,6 @@ const images = [
     title: "r/steamdeals",
     json: "https://www.reddit.com/r/steamdeals/new.json",
     width: "33%"
-  }
 ];
 
 export default function ButtonBases(props) {
@@ -106,6 +106,7 @@ export default function ButtonBases(props) {
                   backgroundImage:
                     //"linear-gradient(rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2))," +
                     " url('" + image.url + "')"
+
                 }}
               >
                 <span className="image-button-text">{image.title}</span>
