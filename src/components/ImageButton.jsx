@@ -93,7 +93,7 @@ export default function ButtonBases(props) {
           <Col xs={6} md={4} lg={3}>
             <a
               className="image-button-link"
-              href="#"
+              href={"#"+image.title}
               onClick={() => {
                 console.log("Clicked: " + image.title);
                 props.changeUrl(image.title);
