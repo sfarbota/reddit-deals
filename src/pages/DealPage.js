@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
-import { getDeal } from "./utils/dataApi";
+import { getDeal } from "../utils/dataApi";
 import Moment from "react-moment";
-import Loading from "./components/Loading";
+import Loading from "../components/Loading";
 
 function DealPage(props) {
   const [deal, setDeal] = useState({});
