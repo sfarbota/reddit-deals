@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from "react";
-import Loading from "./components/Loading";
-import { getRedditDeals } from "./utils/dataApi";
-import ImageButton from "./components/ImageButton";
-import Deal from "./components/Deal";
-import DefImg from "./images/baseline_add_shopping_cart_black.png";
-import "./App.css";
+import Loading from "../components/Loading";
+import { getRedditDeals } from "../utils/dataApi";
+import ImageButton from "../components/ImageButton";
+import Deal from "../components/Deal";
+import DefImg from "../images/baseline_add_shopping_cart_black.png";
+import "../App.css";
 
 function DealList() {
   const [url, setUrl] = useState("");
