@@ -1,80 +1,68 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
+import { useParams } from "react-router-dom";
+import { Context } from "../context";
 import Loading from "../components/Loading";
 import { getRedditDeals } from "../utils/dataApi";
-import ImageButton from "../components/ImageButton";
 import Deal from "../components/Deal";
 import DefImg from "../images/baseline_add_shopping_cart_black.png";
 import "../App.css";
 
 function DealList() {
-  const [url, setUrl] = useState("");
-  const [deals, setDeals] = useState([]);
+  const { subreddit } = useParams();
+  const [state, setState] = useContext(Context);
   const [loading, setLoading] = useState(false);
+  const { deals } = state;
 
-  // const handleClick = dealId => {
-  //   let deal = deals.find(deal => deal.id === dealId);
-  //   alert("Navigating to: " + deal.title);
-  // };
+  console.log(subreddit);
 
   useEffect(() => {
-    setLoading(true && url !== "");
-    if (url !== "") {
-      getRedditDeals(url)
-        //fetch(url)
-        // .then(res => res.json())
-        .then(res => res.data.children)
-        .then(res => {
-          const posts = [];
-          res.map(item => {
-            posts.push(item.data);
-            return posts;
-          });
-          setDeals(posts);
-          setLoading(false);
+    setLoading(true);
+    getRedditDeals(subreddit)
+      .then(res => res.data.children)
+      .then(res => {
+        const posts = [];
+        res.map(item => {
+          posts.push(item.data);
+          return posts;
         });
-    }
-  }, [url]);
+        setState({ deals: posts });
+        setLoading(false);
+      });
+  }, [subreddit, setState]);
 
   const filteredDeals = () => {
     const result = deals.filter(deal => deal.link_flair_text === "[Deal/Sale]");
     return result;
   };
 
-  return (
-    <div className="App">
-      <h1>Reddit Deals</h1>
-      <ImageButton
-        changeUrl={x => {
-          setUrl(x);
-        }}
-      />
-      {loading ? <Loading /> : null}
-      {deals.map((deal, index) => {
-        let img;
+  if (loading) return <Loading />;
+  else {
+    return (
+      <div className="mt-5">
+        {deals.map((deal, index) => {
+          let img;
+          if (
+            !deal.thumbnail ||
+            deal.thumbnail === "self" ||
+            deal.thumbnail === "default"
+          ) {
+            img = DefImg;
+          } else img = deal.thumbnail;
 
-        if (
-          !deal.thumbnail ||
-          deal.thumbnail === "self" ||
-          deal.thumbnail === "default"
-        ) {
-          img = DefImg;
-        } else img = deal.thumbnail;
-
-        return (
-          <Deal
-            index={index}
-            key={deal.id}
-            id={deal.id}
-            title={deal.title}
-            subReddit={deal.subreddit_name_prefixed}
-            thumbnail={img}
-            // url={"https://www.reddit.com/" + deal.permalink}
-            // onClick={handleClick}
-          />
-        );
-      })}
-    </div>
-  );
+          return (
+            <Deal
+              index={1 + index}
+              key={deal.id}
+              id={deal.id}
+              title={deal.title}
+              subReddit={subreddit}
+              thumbnail={img}
+            />
+          );
+        })}
+      </div>
+    );
+  }
 }
 
 export default DealList;

@@ -23,20 +23,17 @@ function Deal(props) {
     //     </tbody>
     //   </table>
     // </div>
-    <div class='container'>
-      <div class='row'>
-        <div class='col-auto'>
-          {index}
+    <div className="container">
+      <div className="row">
+        <div className="col-auto">{index}</div>
+        <div className="col-auto">
+          <img src={thumbnail} width="100px" alt="deal" />
         </div>
-        <div class='col-auto'>
-          <img src={thumbnail} width='100px' alt='deal' />
-        </div>
-        <div class='col-auto'>
+        <div className="col-auto">
           <Link to={link}>{title}</Link>
         </div>
       </div>
     </div>
-
   );
 }
 
