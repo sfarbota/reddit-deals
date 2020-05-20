@@ -1,5 +1,5 @@
 export async function getRedditDeals(subReddit) {
-  return fetch(`https://www.reddit.com/${subReddit}/new.json`).then(res =>
+  return fetch(`https://www.reddit.com/r/${subReddit}/new.json`).then(res =>
     res.json()
   );
 }
