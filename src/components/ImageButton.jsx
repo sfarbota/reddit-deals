@@ -9,9 +9,8 @@ export default function ButtonBases({ changeUrl }) {
     <>
       <Row noGutters>
         {images.map(image => (
-          <Col xs={6} md={4} lg={3}>
+          <Col key={image.title} xs={6} md={4} lg={3}>
             <Link
-              key={image.title}
               className="image-button-link"
               to={image.title}
               onClick={() => {

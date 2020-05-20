@@ -13,8 +13,6 @@ function DealList() {
   const [loading, setLoading] = useState(false);
   const { deals } = state;
 
-  console.log(subreddit);
-
   useEffect(() => {
     setLoading(true);
     getRedditDeals(subreddit)
@@ -43,8 +41,8 @@ function DealList() {
     );
   else {
     return (
-      <div>
-        <h2 className="mt-4 mb-4 d-flex justify-content-center">
+      <div class="list-group list-group-flush">
+        <h2 className="mt-4 mb-4 d-flex justify-content-center text-success">
           {subreddit + ' deals'}
         </h2>
         {deals.map((deal, index) => {
