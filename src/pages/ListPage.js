@@ -1,11 +1,11 @@
-import React, { useState, useEffect, useContext } from "react";
-import { useParams } from "react-router-dom";
-import { Context } from "../context";
-import Loading from "../components/Loading";
-import { getRedditDeals } from "../utils/dataApi";
-import Deal from "../components/Deal";
-import DefImg from "../images/baseline_add_shopping_cart_black.png";
-import "../App.css";
+import React, { useState, useEffect, useContext } from 'react';
+import { useParams } from 'react-router-dom';
+import { Context } from '../context';
+import Loading from '../components/Loading';
+import { getRedditDeals } from '../utils/dataApi';
+import Deal from '../components/Deal';
+import DefImg from '../images/baseline_add_shopping_cart_black.png';
+import '../App.css';
 
 function DealList() {
   const { subreddit } = useParams();
@@ -31,24 +31,31 @@ function DealList() {
   }, [subreddit, setState]);
 
   const filteredDeals = () => {
-    const result = deals.filter(deal => deal.link_flair_text === "[Deal/Sale]");
+    const result = deals.filter(deal => deal.link_flair_text === '[Deal/Sale]');
     return result;
   };
 
-  if (loading) return <Loading />;
+  if (loading)
+    return (
+      <div className="d-flex justify-content-center mt-5">
+        <Loading />
+      </div>
+    );
   else {
     return (
-      <div className="mt-5">
+      <div>
+        <h2 className="mt-4 mb-4 d-flex justify-content-center">
+          {subreddit + ' deals'}
+        </h2>
         {deals.map((deal, index) => {
           let img;
           if (
             !deal.thumbnail ||
-            deal.thumbnail === "self" ||
-            deal.thumbnail === "default"
+            deal.thumbnail === 'self' ||
+            deal.thumbnail === 'default'
           ) {
             img = DefImg;
           } else img = deal.thumbnail;
-
           return (
             <Deal
               index={1 + index}
