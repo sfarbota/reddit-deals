@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { getDeal } from "../utils/dataApi";
 import Moment from "react-moment";
 import Loading from "../components/Loading";
+import ReactMarkdown from "react-markdown";
 
 function DealPage(props) {
   const [deal, setDeal] = useState({});
@@ -10,7 +11,7 @@ function DealPage(props) {
 
   useEffect(() => {
     setLoading(true);
-    getDeal(subreddit, id).then(res => {
+    getDeal(subreddit, id).then((res) => {
       setDeal(res[0].data.children[0].data);
       setLoading(false);
     });
@@ -37,7 +38,9 @@ function DealPage(props) {
         ) : null}
         <ul className="list-group list-group-flush">
           {deal.selftext ? (
-            <li className="list-group-item">{deal.selftext}</li>
+            <li className="list-group-item">
+              <ReactMarkdown source={deal.selftext} />
+            </li>
           ) : null}
           <li className="list-group-item">
             <a href={deal.url} className="card-link">
