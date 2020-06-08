@@ -1,31 +1,43 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
-import { images } from './categories';
-// TODO: import {clothes, pc_parts, video_games} from '../images';
-import { Row, Col } from 'react-bootstrap';
+import React from "react";
+import { Link } from "react-router-dom";
+import { categories } from "./categories";
+import { Row, Col } from "react-bootstrap";
+
+function importAll(r) {
+  let images = {};
+  r.keys().map((item, index) => {
+    images[item.replace("./", "")] = r(item);
+  });
+  return images;
+}
+
+const images = importAll(
+  require.context("../images/category/m", false, /\.jpg/)
+);
 
 export default function ButtonBases({ changeUrl }) {
   return (
     <>
       <Row noGutters>
-        {images.map(image => (
-          <Col key={image.title} xs={6} md={4} lg={3}>
+        {categories.map((category) => (
+          <Col key={category.title} xs={6} md={4} lg={3}>
             <Link
               className="image-button-link"
-              to={image.title}
+              to={category.title}
               onClick={() => {
-                changeUrl(image.title);
+                changeUrl(category.title);
               }}
             >
               <div
                 className="image-button"
                 style={{
                   backgroundImage:
-                    //"linear-gradient(rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2))," +
-                    " url('" + image.url + "')"
+                    " url('" +
+                    images[category.title.toLowerCase() + ".jpg"] +
+                    "')",
                 }}
               >
-                <span className="image-button-text">{image.title}</span>
+                <span className="image-button-text">{category.title}</span>
               </div>
             </Link>
           </Col>

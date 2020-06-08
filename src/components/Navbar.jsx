@@ -1,7 +1,7 @@
-import React from 'react';
-import { images } from './categories';
-import { Link } from 'react-router-dom';
-import { Navbar, Nav, NavDropdown } from 'react-bootstrap';
+import React from "react";
+import { categories } from "./categories";
+import { Link } from "react-router-dom";
+import { Navbar, Nav, NavDropdown } from "react-bootstrap";
 
 function Navigation() {
   return (
@@ -14,11 +14,11 @@ function Navigation() {
         <Navbar.Collapse id="responsive-navbar-nav">
           <Nav className="mr-auto">
             <NavDropdown title="Category" id="basic-nav-dropdown">
-              {images.map(image => (
+              {categories.map((image) => (
                 <Link
                   className="dropdown-item"
                   key={image.title}
-                  to={'/' + image.title}
+                  to={"/" + image.title}
                 >
                   {image.title}
                 </Link>
