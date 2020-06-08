@@ -1,12 +1,12 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
-import { Image } from 'react-bootstrap';
+import React from "react";
+import { Link } from "react-router-dom";
+import { Image } from "react-bootstrap";
 
 function Deal({ index, id, title, subReddit, thumbnail }) {
   const link = `/${subReddit}/${id}`;
 
-  const filterTitle = title => {
-    if (title.length > 86) return title.slice(0, 85) + '...';
+  const filterTitle = (title) => {
+    if (title.length > 86) return title.slice(0, 85) + "...";
     return title;
   };
 
@@ -14,7 +14,7 @@ function Deal({ index, id, title, subReddit, thumbnail }) {
     <li class="list-group-item d-flex">
       <h6 className="d-flex align-items-center mr-3">{index}</h6>
       <Link to={link}>
-        <Image src={thumbnail} className="githubIcon" />
+        <Image src={thumbnail} className="deal-icon" />
       </Link>
       {/* <div className="col-auto mb-3">
         <img src={thumbnail} width="100px" alt="deal" />
