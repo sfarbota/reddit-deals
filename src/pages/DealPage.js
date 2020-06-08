@@ -3,6 +3,7 @@ import { getDeal } from "../utils/dataApi";
 import Moment from "react-moment";
 import Loading from "../components/Loading";
 import ReactMarkdown from "react-markdown";
+import { Button } from "react-bootstrap";
 
 function DealPage(props) {
   const [deal, setDeal] = useState({});
@@ -27,7 +28,15 @@ function DealPage(props) {
   return (
     <div style={{ maxWidth: 800 }} className="container-sm mt-4 mx-auto">
       <div className="card">
-        <div className="card-header font-weight-bold">{deal.title}</div>
+        <div className="card-header">
+          <span className="card-title font-weight-bold">{deal.title}</span>
+          <span className="card-date-time">
+            &nbsp;&nbsp;&#8226;&nbsp;&nbsp;
+            <Moment unix fromNow withTitle titleFormat="LLLL">
+              {deal.created_utc}
+            </Moment>
+          </span>
+        </div>
         {deal.thumbnail &&
         (deal.thumbnail.startsWith("http://") ||
           deal.thumbnail.startsWith("https://")) ? (
@@ -44,16 +53,20 @@ function DealPage(props) {
               <ReactMarkdown source={deal.selftext} />
             </li>
           ) : null}
-          <li className="list-group-item">
-            <a href={deal.url} className="card-link">
-              {deal.url}
-            </a>
-          </li>
-          <li className="list-group-item">
-            <span> Date Created: </span>
-            <Moment unix fromNow withTitle titleFormat="LLLL">
-              {deal.created_utc}
-            </Moment>
+          <li className="list-group-item m-2 mx-auto">
+            <Button
+              onClick={() =>
+                window.open(
+                  deal.url.startsWith("/")
+                    ? "https://www.reddit.com" + deal.url
+                    : deal.url,
+                  "_blank"
+                )
+              }
+              className="card-link"
+            >
+              View Deal &#x1F855;
+            </Button>
           </li>
         </ul>
       </div>
