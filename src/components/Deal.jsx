@@ -12,9 +12,11 @@ function Deal({ index, id, title, subReddit, thumbnail }) {
   return (
     <li class="list-group-item d-flex">
       <h6 className="d-flex align-items-center mr-3">{index}</h6>
-      <Link to={link}>
-        <Image src={thumbnail} className="deal-icon" />
-      </Link>
+      <div className="deal-icon-container">
+        <Link to={link}>
+          <Image src={thumbnail} className="deal-icon" />
+        </Link>
+      </div>
       {/* <div className="col-auto mb-3">
         <img src={thumbnail} width="100px" alt="deal" />
       </div> */}

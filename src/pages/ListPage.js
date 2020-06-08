@@ -48,14 +48,12 @@ function DealList() {
           {subreddit}
         </h2>
         {deals.map((deal, index) => {
-          let img;
-          if (
+          let img =
             !deal.thumbnail ||
-            deal.thumbnail === "self" ||
-            deal.thumbnail === "default"
-          ) {
-            img = DefImg;
-          } else img = deal.thumbnail;
+            (!deal.thumbnail.startsWith("http://") &&
+              !deal.thumbnail.startsWith("https://"))
+              ? DefImg
+              : deal.thumbnail;
           return (
             <Deal
               index={1 + index}

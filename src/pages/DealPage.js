@@ -28,7 +28,9 @@ function DealPage(props) {
     <div style={{ maxWidth: 800 }} className="container-sm mt-4 mx-auto">
       <div className="card">
         <div className="card-header font-weight-bold">{deal.title}</div>
-        {deal.thumbnail ? (
+        {deal.thumbnail &&
+        (deal.thumbnail.startsWith("http://") ||
+          deal.thumbnail.startsWith("https://")) ? (
           <img
             src={deal.thumbnail}
             style={{ width: "30%" }}
