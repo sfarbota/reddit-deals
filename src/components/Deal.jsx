@@ -6,8 +6,7 @@ function Deal({ index, id, title, subReddit, thumbnail }) {
   const link = `/${subReddit}/${id}`;
 
   const filterTitle = (title) => {
-    if (title.length > 86) return title.slice(0, 85) + "...";
-    return title;
+    return title.length > 86 ? title.slice(0, 85) + "..." : title;
   };
 
   return (
@@ -20,7 +19,10 @@ function Deal({ index, id, title, subReddit, thumbnail }) {
         <img src={thumbnail} width="100px" alt="deal" />
       </div> */}
       <Link className="m-3 my-auto" to={link}>
-        <span className="text-success">{filterTitle(title)}</span>
+        <span
+          className="text-success"
+          dangerouslySetInnerHTML={{ __html: filterTitle(title) }}
+        ></span>
       </Link>
     </li>
   );
