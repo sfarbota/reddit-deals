@@ -51,7 +51,9 @@ function DealPage(props) {
           </li>
           <li className="list-group-item">
             <span> Date Created: </span>
-            <Moment format="MM/DD/YYYY">{deal.created_utc}</Moment>
+            <Moment unix fromNow withTitle titleFormat="LLLL">
+              {deal.created_utc}
+            </Moment>
           </li>
         </ul>
       </div>
