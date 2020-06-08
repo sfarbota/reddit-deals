@@ -14,13 +14,13 @@ function Navigation() {
         <Navbar.Collapse id="responsive-navbar-nav">
           <Nav className="mr-auto">
             <NavDropdown title="Category" id="basic-nav-dropdown">
-              {categories.map((image) => (
+              {categories.map((category) => (
                 <Link
                   className="dropdown-item"
-                  key={image.title}
-                  to={"/" + image.title}
+                  key={category}
+                  to={"/" + category}
                 >
-                  {image.title}
+                  {category}
                 </Link>
               ))}
             </NavDropdown>

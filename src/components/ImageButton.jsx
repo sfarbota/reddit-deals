@@ -20,24 +20,22 @@ export default function ButtonBases({ changeUrl }) {
     <>
       <Row noGutters>
         {categories.map((category) => (
-          <Col key={category.title} xs={6} md={4} lg={3}>
+          <Col key={category} xs={6} md={4} lg={3}>
             <Link
               className="image-button-link"
-              to={category.title}
+              to={category}
               onClick={() => {
-                changeUrl(category.title);
+                changeUrl(category);
               }}
             >
               <div
                 className="image-button"
                 style={{
                   backgroundImage:
-                    " url('" +
-                    images[category.title.toLowerCase() + ".jpg"] +
-                    "')",
+                    " url('" + images[category.toLowerCase() + ".jpg"] + "')",
                 }}
               >
-                <span className="image-button-text">{category.title}</span>
+                <span className="image-button-text">{category}</span>
               </div>
             </Link>
           </Col>
