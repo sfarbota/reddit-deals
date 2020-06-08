@@ -12,7 +12,7 @@ function importAll(r) {
 }
 
 const images = importAll(
-  require.context("../images/category/m", false, /\.jpg/)
+  require.context("../images/category/m", false, /\.jpg$/)
 );
 
 export default function ButtonBases({ changeUrl }) {
