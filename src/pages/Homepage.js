@@ -6,13 +6,8 @@ function Home() {
   const [url, setUrl] = useState("");
 
   return (
-    <div className="App">
-      <h1>Reddit Deals</h1>
-      <ImageButton
-        changeUrl={x => {
-          setUrl(x);
-        }}
-      />
+    <div className="home-page-container">
+      <ImageButton changeUrl={(x) => setUrl(x)} />
     </div>
   );
 }

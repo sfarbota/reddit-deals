@@ -1,39 +1,32 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import { Image } from "react-bootstrap";
 
-function Deal(props) {
-  const { index, id, title, subReddit, thumbnail } = props;
-  // const { index, id, title, url, onClick, thumbnail } = props;
-
+function Deal({ index, id, title, subReddit, thumbnail }) {
   const link = `/${subReddit}/${id}`;
 
+  const filterTitle = (title) => {
+    return title.length > 86 ? title.slice(0, 85) + "..." : title;
+  };
+
   return (
-    // <div className="mt-4 deal" id={"deal-" + id}>
-    //   <table className="table">
-    //     <tbody>
-    //       <tr>
-    //         <th scope="row">{index}</th>
-    //         <td align="center">
-    //           <img src={thumbnail} width="100px" alt="deal" />
-    //         </td>
-    //         <td>
-    //           <Link to={link}>{title}</Link>
-    //         </td>
-    //       </tr>
-    //     </tbody>
-    //   </table>
-    // </div>
-    <div className="container">
-      <div className="row">
-        <div className="col-auto">{index}</div>
-        <div className="col-auto">
-          <img src={thumbnail} width="100px" alt="deal" />
-        </div>
-        <div className="col-auto">
-          <Link to={link}>{title}</Link>
-        </div>
+    <li class="list-group-item d-flex">
+      <h6 className="d-flex align-items-center mr-3">{index}</h6>
+      <div className="deal-icon-container d-flex flex-wrap align-items-center">
+        <Link to={link}>
+          <Image src={thumbnail} className="deal-icon" />
+        </Link>
       </div>
-    </div>
+      {/* <div className="col-auto mb-3">
+        <img src={thumbnail} width="100px" alt="deal" />
+      </div> */}
+      <Link className="m-3 my-auto" to={link}>
+        <span
+          className="text-success"
+          dangerouslySetInnerHTML={{ __html: filterTitle(title) }}
+        ></span>
+      </Link>
+    </li>
   );
 }
 

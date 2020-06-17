@@ -1,40 +1,35 @@
-import React, { useContext } from "react";
+import React from "react";
+import { categories } from "./categories";
 import { Link } from "react-router-dom";
-import { Context } from "../context";
 import { Navbar, Nav, NavDropdown } from "react-bootstrap";
+import { Image } from "react-bootstrap";
+import UserIcon from "../images/user.png";
 
 function Navigation() {
-  const [state, setState] = useContext(Context);
-
   return (
-    <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark">
+    <Navbar collapseOnSelect expand="lg" bg="light" variant="light">
       <div className="container">
-        <Link to="/">
-          <Navbar.Brand href="/">Home</Navbar.Brand>
+        <Link className="navbar-brand" to="/">
+          Reddit Deals
         </Link>
         <Navbar.Toggle aria-controls="responsive-navbar-nav" />
         <Navbar.Collapse id="responsive-navbar-nav">
           <Nav className="mr-auto">
-            <Nav.Link href="/subreddits">Subreddits</Nav.Link>
-            <Nav.Link href="#/account">Account</Nav.Link>
-            <NavDropdown title="Category" id="collasible-nav-dropdown">
-              <NavDropdown.Item href="#action/3.1">
-                r/buildapcsales
-              </NavDropdown.Item>
-              <NavDropdown.Item href="#action/3.2">r/GameSale</NavDropdown.Item>
-              <NavDropdown.Item href="#action/3.3">
-                r/frugalmalefashion
-              </NavDropdown.Item>
-              <NavDropdown.Divider />
-              <NavDropdown.Item href="#action/3.4">
-                Separated link
-              </NavDropdown.Item>
+            <NavDropdown title="Category" id="basic-nav-dropdown">
+              {categories.map((category) => (
+                <Link
+                  className="dropdown-item"
+                  key={category}
+                  to={"/" + category}
+                >
+                  {category}
+                </Link>
+              ))}
             </NavDropdown>
           </Nav>
           <Nav>
-            <Nav.Link href="#deets">More deets</Nav.Link>
-            <Nav.Link eventKey={2} href="#memes">
-              Dank memes
+            <Nav.Link href="#account">
+              <Image src={UserIcon} className="user-icon" />
             </Nav.Link>
           </Nav>
         </Navbar.Collapse>

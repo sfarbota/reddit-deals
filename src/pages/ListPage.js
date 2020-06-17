@@ -13,15 +13,13 @@ function DealList() {
   const [loading, setLoading] = useState(false);
   const { deals } = state;
 
-  console.log(subreddit);
-
   useEffect(() => {
     setLoading(true);
     getRedditDeals(subreddit)
-      .then(res => res.data.children)
-      .then(res => {
+      .then((res) => res.data.children)
+      .then((res) => {
         const posts = [];
-        res.map(item => {
+        res.map((item) => {
           posts.push(item.data);
           return posts;
         });
@@ -31,24 +29,31 @@ function DealList() {
   }, [subreddit, setState]);
 
   const filteredDeals = () => {
-    const result = deals.filter(deal => deal.link_flair_text === "[Deal/Sale]");
+    const result = deals.filter(
+      (deal) => deal.link_flair_text === "[Deal/Sale]"
+    );
     return result;
   };
 
-  if (loading) return <Loading />;
+  if (loading)
+    return (
+      <div className="d-flex justify-content-center mt-5">
+        <Loading />
+      </div>
+    );
   else {
     return (
-      <div className="mt-5">
+      <div class="list-group list-group-flush">
+        <h2 className="mt-4 mb-4 d-flex justify-content-center text-success">
+          {subreddit}
+        </h2>
         {deals.map((deal, index) => {
-          let img;
-          if (
+          let img =
             !deal.thumbnail ||
-            deal.thumbnail === "self" ||
-            deal.thumbnail === "default"
-          ) {
-            img = DefImg;
-          } else img = deal.thumbnail;
-
+            (!deal.thumbnail.startsWith("http://") &&
+              !deal.thumbnail.startsWith("https://"))
+              ? DefImg
+              : deal.thumbnail;
           return (
             <Deal
               index={1 + index}
