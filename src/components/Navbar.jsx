@@ -19,10 +19,10 @@ function Navigation() {
               {categories.map((category) => (
                 <Link
                   className="dropdown-item"
-                  key={category}
-                  to={"/" + category}
+                  key={category.name}
+                  to={"/" + category.name}
                 >
-                  {category}
+                  {category.name}
                 </Link>
               ))}
             </NavDropdown>

@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useContext } from "react";
 import { useParams } from "react-router-dom";
 import { Context } from "../context";
+import { categories } from "../components/categories";
 import Loading from "../components/Loading";
 import { getRedditDeals } from "../utils/dataApi";
 import Deal from "../components/Deal";
@@ -12,6 +13,9 @@ function DealList() {
   const [state, setState] = useContext(Context);
   const [loading, setLoading] = useState(false);
   const { deals } = state;
+  const category = categories.find((category) => {
+    return category.name === subreddit;
+  });
 
   useEffect(() => {
     setLoading(true);
@@ -30,7 +34,7 @@ function DealList() {
 
   const filteredDeals = () => {
     const result = deals.filter(
-      (deal) => deal.link_flair_text === "[Deal/Sale]"
+      (deal) => !category.excluded_flair.includes(deal.link_flair_text)
     );
     return result;
   };
@@ -47,7 +51,7 @@ function DealList() {
         <h2 className="mt-4 mb-4 d-flex justify-content-center text-success">
           {subreddit}
         </h2>
-        {deals.map((deal, index) => {
+        {filteredDeals().map((deal, index) => {
           let img =
             !deal.thumbnail ||
             (!deal.thumbnail.startsWith("http://") &&
