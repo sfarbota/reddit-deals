@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { getDeal } from "../utils/dataApi";
+import { getDeal, getDealImage } from "../utils/dataApi";
 import Moment from "react-moment";
 import Loading from "../components/Loading";
 import ReactMarkdown from "react-markdown";
@@ -7,15 +7,24 @@ import { Button } from "react-bootstrap";
 
 function DealPage(props) {
   const [deal, setDeal] = useState({});
+  const [imageUrl, setImageUrl] = useState("");
   const { id, subreddit } = props.match.params;
   const [loading, setLoading] = useState(false);
 
   useEffect(() => {
     setLoading(true);
-    getDeal(subreddit, id).then((res) => {
-      setDeal(res[0].data.children[0].data);
-      setLoading(false);
-    });
+    getDeal(subreddit, id)
+      .then((res) => {
+        var deal = res[0].data.children[0].data;
+        setDeal(deal);
+        return deal;
+      })
+      .then((deal) => {
+        getDealImage(deal).then((imageUrlRes) => {
+          setImageUrl(imageUrlRes);
+          setLoading(false);
+        });
+      });
   }, [subreddit, id]);
 
   if (loading)
@@ -29,7 +38,10 @@ function DealPage(props) {
     <div style={{ maxWidth: 800 }} className="container-sm mt-4 mx-auto">
       <div className="card">
         <div className="card-header">
-          <span className="card-title font-weight-bold">{deal.title}</span>
+          <span
+            className="card-title font-weight-bold"
+            dangerouslySetInnerHTML={{ __html: deal.title }}
+          ></span>
           <span className="card-date-time">
             &nbsp;&nbsp;&#8226;&nbsp;&nbsp;
             <Moment unix fromNow withTitle titleFormat="LLLL">
@@ -37,11 +49,9 @@ function DealPage(props) {
             </Moment>
           </span>
         </div>
-        {deal.thumbnail &&
-        (deal.thumbnail.startsWith("http://") ||
-          deal.thumbnail.startsWith("https://")) ? (
+        {imageUrl ? (
           <img
-            src={deal.thumbnail}
+            src={imageUrl}
             style={{ width: "30%" }}
             className="card-img-top m-2 mx-auto"
             alt="deal"

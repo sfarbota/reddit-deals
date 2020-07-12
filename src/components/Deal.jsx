@@ -10,7 +10,7 @@ function Deal({ index, id, title, subReddit, thumbnail }) {
   };
 
   return (
-    <li class="list-group-item d-flex">
+    <li className="list-group-item d-flex">
       <h6 className="d-flex align-items-center mr-3">{index}</h6>
       <div className="deal-icon-container d-flex flex-wrap align-items-center">
         <Link to={link}>

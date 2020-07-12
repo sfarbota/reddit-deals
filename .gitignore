@@ -111,3 +111,6 @@ dist
 
 # Desktop Services Store
 .DS_Store
+
+# Visual Studio Code Settings
+.vscode/launch.json
